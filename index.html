@@ -9,24 +9,19 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-
-        /* レスポンシブデザイン */
         table {
             border-collapse: collapse;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 20px; /* 新しいテーブルとの間にスペース */
         }
-
         th, td {
             border: 1px solid #7e7e7e;
             padding: 10px;
             text-align: center;
         }
-
         th {
             background-color: #f2f2f2;
         }
-
         input {
             width: 100%;
             height: 100%;
@@ -34,7 +29,6 @@
             text-align: center;
             font-size: 16px;
         }
-
         input:focus {
             outline: none;
         }
@@ -46,30 +40,6 @@
 
         .row-index {
             width: 30px;
-        }
-
-        /* スマホサイズでのスタイル調整 */
-        @media (max-width: 600px) {
-            th, td {
-                padding: 5px;
-                font-size: 14px; /* 小さな文字 */
-            }
-
-            input {
-                font-size: 14px; /* 入力フィールドも小さくする */
-            }
-
-            .row-index {
-                width: 20px; /* 行番号を小さく */
-            }
-
-            table {
-                margin-top: 10px;
-            }
-
-            button {
-                font-size: 14px; /* ボタンの文字も小さく */
-            }
         }
     </style>
 </head>
@@ -91,10 +61,10 @@
         </tr>
         <tr>
             <td class="row-index">1</td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
+            <td><input type="text" pattern="^[0-9]+$" onchange="updateSums()"></td>
+            <td><input type="text" pattern="^[0-9]+$" onchange="updateSums()"></td>
+            <td><input type="text" pattern="^[0-9]+$" onchange="updateSums()"></td>
+            <td><input type="text" pattern="^[0-9]+$" onchange="updateSums()"></td>
         </tr>
         <tr>
             <td class="row-index">2</td>
