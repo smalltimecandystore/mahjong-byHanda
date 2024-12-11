@@ -54,6 +54,22 @@
             width: 30px;
         }
 
+        button{
+            display: inline-block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            background: #668ad8;/*ボタン色*/
+            color: #FFF;
+            border-bottom: solid 4px #627295;
+            border-radius: 3px;
+        }
+
+        button{
+            -webkit-transform: translateY(4px);
+            transform: translateY(4px);/*下に動く*/
+            border-bottom: none;/*線を消す*/
+        }
+
         /* スマホサイズでのスタイル調整 */
         @media (max-width: 600px) {
             th {
@@ -90,8 +106,6 @@
 
     <h2>けいさんするよ</h2>
 
-    <!-- 行追加ボタン -->
-    <button onclick="addRow('excelTable')">行追加</button>
 
     <!-- 計算テーブル -->
     <table id="excelTable">
@@ -125,6 +139,9 @@
         </tr>
     </table>
 
+    <br>
+    <!-- 行追加ボタン -->
+    <button onclick="addRow('excelTable')">行追加</button>
     <br>
 
     <!-- 合計テーブル -->
