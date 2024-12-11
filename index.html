@@ -169,6 +169,7 @@
 
             // 行番号を付与
             cell1.textContent = table.rows.length - 1; // 最後の行を除いて番号付け
+            cell1.className = "row-index"; // クラスを付与
 
             // 各セルに入力フィールドを追加
             cell2.innerHTML = '<input type="number" onchange="updateSums()">';
