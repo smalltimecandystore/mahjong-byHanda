@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3麻 けいさんするよ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 5px;
+        }
+
+        /* レスポンシブデザイン */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        td {
+            border: 1px solid #7e7e7e;
+            padding: 5px;
+            height: 50px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            border: 1px solid #7e7e7e;
+            padding: 5px;
+            height: 50px;
+            text-align: center;
+        }
+
+        input {
+            padding: auto;
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        /* 2つ目のテーブルの合計のセルを強調するために設定 */
+        #newTable td {
+            font-weight: bold;
+        }
+
+        .row-index {
+            width: 30px;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 15px 30px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #003f7f;
+        }
+
+        /* 状態による行番号のスタイル */
+        .row-index.green {
+        color: #fff;
+        background-color: #4caf50; /* 柔らかい緑 */
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 5px 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .row-index.red {
+            color: #fff;
+            background-color: #f44336; /* 柔らかい赤 */
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .row-index.green:hover, .row-index.red:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* スマホサイズでのスタイル調整 */
+        @media (max-width: 600px) {
+            th {
+                padding: 10px 15px 10px 3px;
+                font-size: 14px; /* 小さな文字 */
+                width: 17%;
+            }
+
+            td {
+                padding: 10px 15px 10px 3px;
+                font-size: 14px; /* 小さな文字 */
+                width: 17%;
+            }
+
+            input {
+                font-size: 14px; /* 入力フィールドも小さくする */
+            }
+
+            .row-index {
+                width: 10%; /* 行番号を小さく */
+            }
+
+            table {
+                margin-top: 10px;
+            }
+
+            button {
+                font-size: 14px; /* ボタンの文字も小さく */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>3麻 けいさんするよ</h2>
+
+
+    <!-- 計算テーブル -->
+    <table id="excelTable">
+        <tr>
+            <th class="row-index">#</th>
+            <th><input type="text" placeholder="なまえ"></th>
+            <th><input type="text" placeholder="なまえ"></th>
+            <th><input type="text" placeholder="なまえ"></th>
+        </tr>
+        <tr>
+            <td class="row-index">1</td>
+            <td><input type="number" onchange="updateSums()"></td>
+            <td><input type="number" onchange="updateSums()"></td>
+            <td><input type="number" onchange="updateSums()"></td>
+        </tr>
+        <tr>
+            <td class="row-index">2</td>
+            <td><input type="number" onchange="updateSums()"></td>
+            <td><input type="number" onchange="updateSums()"></td>
+            <td><input type="number" onchange="updateSums()"></td>
+        </tr>
+        <tr>
+            <td class="row-index">3</td>
+            <td><input type="number" onchange="updateSums()"></td>
+            <td><input type="number" onchange="updateSums()"></td>
+            <td><input type="number" onchange="updateSums()"></td>
+        </tr>
+    </table>
+
+    <br>
+    <!-- 行追加ボタン -->
+    <button onclick="addRow('excelTable')">行追加</button>
+    <br>
+
+    <!-- 合計テーブル -->
+    <table id="newTable">
+        <tr>
+            <td class="row-index">計</td>
+            <td><input type="number" readonly></td>
+            <td><input type="number" readonly></td>
+            <td><input type="number" readonly></td>
+        </tr>
+    </table>
+
+    <script>
+        // 行追加の関数
+        function addRow(tableId) {
+            const table = document.getElementById(tableId);
+            const newRow = table.insertRow(table.rows.length); 
+
+            const cell1 = newRow.insertCell(0); // 行番号
+            const cell2 = newRow.insertCell(1); // 数字1
+            const cell3 = newRow.insertCell(2); // 数字2
+            const cell4 = newRow.insertCell(3); // 数字3
+
+            // 行番号を付与
+            cell1.textContent = table.rows.length - 1; // 最後の行を除いて番号付け
+            cell1.className = "row-index"; // クラスを付与
+
+            // 各セルに入力フィールドを追加
+            cell2.innerHTML = '<input type="number" onchange="updateSums()">';
+            cell3.innerHTML = '<input type="number" onchange="updateSums()">';
+            cell4.innerHTML = '<input type="number" onchange="updateSums()">';
+        }
+
+        // 合計を計算して合計テーブルに反映する関数
+        function updateSums() {
+            const table = document.getElementById("excelTable");
+            let sum1 = 0, sum2 = 0, sum3 = 0;
+
+            // 各行の入力値を取得して合計を計算
+            for (let i = 1; i < table.rows.length; i++) {
+                const row = table.rows[i];
+                const val1 = parseFloat(row.cells[1].querySelector("input").value || 0);
+                const val2 = parseFloat(row.cells[2].querySelector("input").value || 0);
+                const val3 = parseFloat(row.cells[3].querySelector("input").value || 0);
+
+                sum1 += val1;
+                sum2 += val2;
+                sum3 += val3;
+
+                // 行番号の色を変更
+                const rowIndexCell = row.cells[0];
+                if (val1 + val2 + val3 === 0) {
+                    rowIndexCell.className = "row-index green";
+                } else {
+                    rowIndexCell.className = "row-index red";
+                }
+            }
+
+            // 合計テーブルに反映
+            const newTable = document.getElementById("newTable");
+            newTable.rows[0].cells[1].querySelector("input").value = sum1;
+            newTable.rows[0].cells[2].querySelector("input").value = sum2;
+            newTable.rows[0].cells[3].querySelector("input").value = sum3;
+        }
+    </script>
+
+</body>
+</html>
