@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -36,7 +36,7 @@
         .button {
             display: block;
             margin: 10px auto;
-            padding: 15px 30px;
+            padding: 15px 15px 15px 30px;
             font-size: 16px;
             color: #fff;
             background-color: #007bff;
@@ -55,6 +55,22 @@
 
         .button:active {
             background-color: #003f7f;
+        }
+
+        /* スマホサイズでの調整 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.2rem; /* 見出しの文字を小さく */
+            }
+
+            .button {
+                font-size: 14px; /* ボタンの文字サイズを小さく */
+                padding: 10px 20px; /* ボタンのパディングを調整 */
+            }
+
+            .container {
+                padding: 15px; /* 全体の余白を少し減らす */
+            }
         }
     </style>
 </head>
