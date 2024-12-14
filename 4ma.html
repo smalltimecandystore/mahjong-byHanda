@@ -103,6 +103,14 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        /* row-nameを固定する */
+        .main thead th{
+            position: sticky;
+            position: -webkit-sticky;
+            top: 0;
+            z-index: 1;
+        }
+
         /* スマホサイズでのスタイル調整 */
         @media (max-width: 600px) {
             th {
@@ -139,38 +147,42 @@
 
     <h2>4麻 けいさんするよ</h2>
 
-
     <!-- 計算テーブル -->
-    <table id="excelTable">
-        <tr>
-            <th class="row-index">#</th>
-            <th><input type="text" placeholder="なまえ"></th>
-            <th><input type="text" placeholder="なまえ"></th>
-            <th><input type="text" placeholder="なまえ"></th>
-            <th><input type="text" placeholder="なまえ"></th>
-        </tr>
-        <tr>
-            <td class="row-index">1</td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-        </tr>
-        <tr>
-            <td class="row-index">2</td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-        </tr>
-        <tr>
-            <td class="row-index">3</td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-            <td><input type="number" onchange="updateSums()"></td>
-        </tr>
-    </table>
+    <div class="main">
+        <table id="excelTable">
+            <thead>
+                <tr>
+                    <th class="row-index">#</th>
+                    <th><input type="text" placeholder="なまえ"></th>
+                    <th><input type="text" placeholder="なまえ"></th>
+                    <th><input type="text" placeholder="なまえ"></th>
+                    <th><input type="text" placeholder="なまえ"></th>
+                </tr>
+            </thead>
+            <tr>
+                <td class="row-index">1</td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+            </tr>
+            <tr>
+                <td class="row-index">2</td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+            </tr>
+            <tr>
+                <td class="row-index">3</td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+                <td><input type="number" onchange="updateSums()"></td>
+            </tr>
+        </table>
+    </div>
+
 
     <br>
     <!-- 行追加ボタン -->
