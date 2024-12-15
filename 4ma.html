@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4麻 けいさんするよ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
+    <title>4人麻雀 けいさんするよ</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,7 +46,12 @@
         }
 
         /* 2つ目のテーブルの合計のセルを強調するために設定 */
-        #newTable td {
+        #sumTable td {
+            font-weight: bold;
+        }
+
+        #checkTable td {
+            height: 30px;
             font-weight: bold;
         }
 
@@ -80,13 +85,13 @@
 
         /* 状態による行番号のスタイル */
         .row-index.green {
-        color: #fff;
-        background-color: #4caf50; /* 柔らかい緑 */
-        font-weight: bold;
-        border-radius: 8px;
-        padding: 5px 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            color: #fff;
+            background-color: #4caf50; /* 柔らかい緑 */
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .row-index.red {
@@ -109,6 +114,30 @@
             position: -webkit-sticky;
             top: 0;
             z-index: 1;
+        }
+
+        #rateAndChipSection {
+            margin: 20px 0;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        #rateAndChipSection label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        #rateAndChipSection input {
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            text-align: center;
+            margin-right: 5px;
+        }
+
+        #rateAndChipSection span {
+            font-weight: normal;
+            font-size: 16px;
         }
 
         /* スマホサイズでのスタイル調整 */
@@ -145,7 +174,8 @@
 </head>
 <body>
 
-    <h2>4麻 けいさんするよ</h2>
+    <h2>４人麻雀 けいさんするよ</h2>
+
 
     <!-- 計算テーブル -->
     <div class="main">
@@ -183,16 +213,44 @@
         </table>
     </div>
 
-
     <br>
     <!-- 行追加ボタン -->
     <button onclick="addRow('excelTable')">行追加</button>
     <br>
 
+    <!-- レートとチップ入力欄 -->
+    <div id="rateAndChipSection">
+        <label for="rateInput">レート：</label>
+        <input type="number" id="rateInput" placeholder="0" onchange="updateCheckTable()">
+        <span>P/千点</span>
+        <br><br>
+        <label for="chipInput">チップ：</label>
+        <input type="number" id="chipInput" placeholder="0" onchange="updateCheckTable()">
+        <span>P/千点</span>
+    </div>
+
     <!-- 合計テーブル -->
-    <table id="newTable">
+    <table id="sumTable">
         <tr>
             <td class="row-index">計</td>
+            <td><input type="number" readonly></td>
+            <td><input type="number" readonly></td>
+            <td><input type="number" readonly></td>
+            <td><input type="number" readonly></td>
+        </tr>
+        <tr>
+            <td class="row-index">チ</td>
+            <td><input type="number" onchange="updateCheckTable()"></td>
+            <td><input type="number" onchange="updateCheckTable()"></td>
+            <td><input type="number" onchange="updateCheckTable()"></td>
+            <td><input type="number" onchange="updateCheckTable()"></td>
+        </tr>
+    </table>
+
+    <!-- 清算テーブル -->
+    <table id="checkTable">
+        <tr>
+            <td class="row-index">清算</td>
             <td><input type="number" readonly></td>
             <td><input type="number" readonly></td>
             <td><input type="number" readonly></td>
@@ -251,11 +309,53 @@
             }
 
             // 合計テーブルに反映
-            const newTable = document.getElementById("newTable");
-            newTable.rows[0].cells[1].querySelector("input").value = sum1;
-            newTable.rows[0].cells[2].querySelector("input").value = sum2;
-            newTable.rows[0].cells[3].querySelector("input").value = sum3;
-            newTable.rows[0].cells[4].querySelector("input").value = sum4;
+            const sumTable = document.getElementById("sumTable");
+            sumTable.rows[0].cells[1].querySelector("input").value = sum1;
+            sumTable.rows[0].cells[2].querySelector("input").value = sum2;
+            sumTable.rows[0].cells[3].querySelector("input").value = sum3;
+            sumTable.rows[0].cells[4].querySelector("input").value = sum4;
+        }
+
+        // 清算テーブルを計算して更新する関数
+        function updateCheckTable() {
+            const rate = parseFloat(document.getElementById("rateInput").value || 0);
+            const chip = parseFloat(document.getElementById("chipInput").value || 0);
+            let sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+
+            const sumTable = document.getElementById("sumTable");
+            const sumRow = sumTable.rows[0]; // "計"行
+            const chipRow = sumTable.rows[1]; // "チ"行
+
+            const sumA = parseFloat(sumRow.cells[1].querySelector("input").value || 0);
+            const sumB = parseFloat(sumRow.cells[2].querySelector("input").value || 0);
+            const sumC = parseFloat(sumRow.cells[3].querySelector("input").value || 0);
+            const sumD = parseFloat(sumRow.cells[4].querySelector("input").value || 0);
+
+            const chip1 = parseFloat(chipRow.cells[1].querySelector("input").value || 0);
+            const chip2 = parseFloat(chipRow.cells[2].querySelector("input").value || 0);
+            const chip3 = parseFloat(chipRow.cells[3].querySelector("input").value || 0);
+            const chip4 = parseFloat(chipRow.cells[4].querySelector("input").value || 0);
+
+            sum1 = sumA*rate + chip1*chip;
+            sum2 = sumB*rate + chip2*chip;
+            sum3 = sumC*rate + chip3*chip;
+            sum4 = sumD*rate + chip4*chip;
+
+            // 合計テーブルに反映
+            const checkTable = document.getElementById("checkTable");
+            checkTable.rows[0].cells[1].querySelector("input").value = sum1;
+            checkTable.rows[0].cells[2].querySelector("input").value = sum2;
+            checkTable.rows[0].cells[3].querySelector("input").value = sum3;
+            checkTable.rows[0].cells[4].querySelector("input").value = sum4;
+
+            // 行番号の色を変更
+            const row = checkTable.rows[0];
+            const rowIndexCell = row.cells[0];
+            if (sum1 + sum2 + sum3 + sum4 === 0) {
+                rowIndexCell.className = "row-index green";
+            } else {
+                rowIndexCell.className = "row-index red";
+            }
         }
     </script>
 
