@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>麻雀モード選択</title>
+    <meta name="description" content="麻雀のスコア計算を簡単に行えるウェブアプリです。4人麻雀と3人麻雀のモード選択が可能で、チップの計算もするよ">
+    <meta name="keywords" content="麻雀, スコア計算, けいさんするよ, 3人麻雀, 4人麻雀, チップ, 半田">
+    <meta name="author" content="あなたの名前">
+    <title>麻雀スコア計算</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,6 +28,12 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 400px;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 20px;
         }
 
         h1 {
@@ -55,6 +64,17 @@
             background-color: #003f7f;
         }
 
+        .contact-link {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
         /* スマホサイズでの調整 */
         @media (max-width: 600px) {
             h1 {
@@ -69,14 +89,21 @@
             .container {
                 padding: 15px; /* 全体の余白を少し減らす */
             }
+
+            .contact-link {
+                font-size: 0.8rem; /* お問い合わせリンクの文字サイズを調整 */
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>麻雀モード選択</h1>
+        <h1>麻雀スコア計算</h1>
+        <p class="description">麻雀のスコア計算を簡単に！<br>4人麻雀、3人麻雀、チップも合わせてけいさんするよ</p>
         <a href="https://smalltimecandystore.github.io/mahjong-byHanda/4ma" class="button" onclick="selectMode('4人麻雀')">4人麻雀</a>
         <a href="https://smalltimecandystore.github.io/mahjong-byHanda/3ma" class="button" onclick="selectMode('3人麻雀')">3人麻雀</a>
+        <a href="https://www.instagram.com/smalltimecandystore/" class="contact-link" target="_blank" rel="noopener noreferrer">お問い合わせはdmで</a>
+
     </div>
 </body>
 </html>
