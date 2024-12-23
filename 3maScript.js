@@ -13,9 +13,9 @@ function addRow(tableId) {
     cell1.className = "row-index"; // クラスを付与
 
     // 各セルに入力フィールドを追加
-    cell2.innerHTML = '<input type="number" onchange="updateSums()">';
-    cell3.innerHTML = '<input type="number" onchange="updateSums()">';
-    cell4.innerHTML = '<input type="number" onchange="updateSums()">';
+    cell2.innerHTML = '<input type="number" onchange="updateSums(); updateCheckTable()">';
+    cell3.innerHTML = '<input type="number" onchange="updateSums(); updateCheckTable()">';
+    cell4.innerHTML = '<input type="number" onchange="updateSums(); updateCheckTable()">';
 }
 
 // 合計を計算して合計テーブルに反映する関数
